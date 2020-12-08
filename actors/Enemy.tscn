@@ -1,28 +1,108 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/kenney_shooter/spritesheet_characters.png" type="Texture" id=1]
-[ext_resource path="res://actors/Player.gd" type="Script" id=2]
-[ext_resource path="res://weapons/Bullet.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/Enemy.gd" type="Script" id=3]
+[ext_resource path="res://actors/Health.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/sounds/zombie/step1.ogg" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/zombie/step3.ogg" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/zombie/step5.ogg" type="AudioStream" id=8]
+[ext_resource path="res://assets/sounds/zombie/step2.ogg" type="AudioStream" id=9]
+[ext_resource path="res://assets/sounds/zombie/step4.ogg" type="AudioStream" id=10]
+[ext_resource path="res://assets/sounds/zombie/hurt1.ogg" type="AudioStream" id=11]
+[ext_resource path="res://assets/sounds/zombie/hurt2.ogg" type="AudioStream" id=12]
+[ext_resource path="res://assets/sounds/zombie/death.ogg" type="AudioStream" id=13]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 20.6381
-height = 6.10454
+radius = 21.3524
+height = 13.7659
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 13.4482
+height = 6.1618
+
+[sub_resource type="Animation" id=3]
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="Enemy" type="KinematicBody2D"]
 position = Vector2( 620.46, 241.405 )
-script = ExtResource( 2 )
-Bullet = ExtResource( 3 )
+z_index = 1
+script = ExtResource( 3 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Body" type="Area2D" parent="."]
+
+[node name="Sprite" type="Sprite" parent="Body"]
 position = Vector2( 10, -1 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 426, 0, 33, 43 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 10.3784, -0.891893 )
+[node name="step1" type="AudioStreamPlayer2D" parent="Body/Sprite"]
+stream = ExtResource( 5 )
+volume_db = -25.0
+max_distance = 500.0
+
+[node name="step2" type="AudioStreamPlayer2D" parent="Body/Sprite"]
+stream = ExtResource( 9 )
+volume_db = -25.0
+
+[node name="step3" type="AudioStreamPlayer2D" parent="Body/Sprite"]
+position = Vector2( -10, 1 )
+stream = ExtResource( 7 )
+volume_db = -25.0
+
+[node name="step4" type="AudioStreamPlayer2D" parent="Body/Sprite"]
+stream = ExtResource( 10 )
+volume_db = -25.0
+
+[node name="step5" type="AudioStreamPlayer2D" parent="Body/Sprite"]
+stream = ExtResource( 8 )
+volume_db = -25.0
+
+[node name="hurt1" type="AudioStreamPlayer2D" parent="Body/Sprite"]
+z_index = 1
+stream = ExtResource( 11 )
+volume_db = -25.0
+
+[node name="hurt2" type="AudioStreamPlayer2D" parent="Body/Sprite"]
+stream = ExtResource( 12 )
+volume_db = -25.0
+
+[node name="death" type="AudioStreamPlayer2D" parent="Body/Sprite"]
+stream = ExtResource( 13 )
+volume_db = -25.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+position = Vector2( 10.6066, -0.530319 )
 shape = SubResource( 1 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 10.6066, -0.707092 )
+shape = SubResource( 2 )
+
 [node name="AttackCooldown" type="Timer" parent="."]
-wait_time = 0.7
 one_shot = true
+
+[node name="Health" parent="." instance=ExtResource( 4 )]
+health = 80
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/DamageAnimation = SubResource( 3 )
+
+[node name="Blood" type="CPUParticles2D" parent="."]
+position = Vector2( 10.0908, -3.78403 )
+emitting = false
+spread = 44.03
+color = Color( 1, 0, 0, 1 )

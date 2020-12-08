@@ -10,23 +10,57 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Area2D",
+"class": "AmmoPackage",
+"language": "GDScript",
+"path": "res://packages/AmmoPackage.gd"
+}, {
+"base": "Area2D",
 "class": "Bullet",
 "language": "GDScript",
 "path": "res://weapons/Bullet.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://actors/Enemy.gd"
+}, {
+"base": "Area2D",
+"class": "HealthPackage",
+"language": "GDScript",
+"path": "res://packages/HealthPackage.gd"
+}, {
+"base": "Node2D",
+"class": "Main",
+"language": "GDScript",
+"path": "res://Main.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Player",
+"language": "GDScript",
+"path": "res://actors/Player.gd"
 } ]
 _global_script_class_icons={
-"Bullet": ""
+"AmmoPackage": "",
+"Bullet": "",
+"Enemy": "",
+"HealthPackage": "",
+"Main": "",
+"Player": ""
 }
 
 [application]
 
 config/name="Top-Down-Shooter"
-run/main_scene="res://Main.tscn"
+run/main_scene="res://MainMenu.tscn"
 config/icon="res://icon.png"
 
 [display]
 
 window/stretch/mode="2d"
+
+[global]
+
+collision=false
 
 [importer_defaults]
 

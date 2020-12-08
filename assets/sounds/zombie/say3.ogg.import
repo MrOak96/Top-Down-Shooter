@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/say3.ogg-e57bdf929c7fe470800a6f5707e31e3e.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/zombie/say3.ogg"
+dest_files=[ "res://.import/say3.ogg-e57bdf929c7fe470800a6f5707e31e3e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
