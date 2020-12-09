@@ -89,8 +89,9 @@ func take_damage(count):
 func updateUI():
 	health_bar.value = (health/max_health*100)
 	ammo_bar.value = weapon.ammo/weapon.max_ammo*100
-	$GUI/LevelBar.value = experience
+	$GUI/LevelBar.value = (experience/(100 * (level * 0.5))) * 100
 	$GUI/Level.text = String(level)
+	print(experience)
 	
 func handle_ammo_package(var package):
 	if(weapon.ammo != weapon.max_ammo):
@@ -109,9 +110,9 @@ func handle_exp_package(var package):
 
 func gain_exp(var ex):
 	experience += ex
-	if(experience >= 100):
+	if(experience >= (100 * (level * 0.5))):
+		experience -= (100 * (level * 0.5))
 		levelup()
-		experience -= 100
 	else:
 		$Body/Sprite/exp.play()
 	updateUI()
@@ -120,7 +121,7 @@ func levelup():
 	$Body/Sprite/level_up.play()
 	level += 1
 	weapon.max_cooldown *= 0.90
-	weapon.max_ammo *= 1.5
+	weapon.max_ammo += 10
 	weapon.damage *= 1.075
 	speed *= 1.05
 	get_parent().spawn_rate *= 0.90

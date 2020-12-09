@@ -47,7 +47,7 @@ func spawn_enemy(enemy: Enemy):
 		if(index > 7):
 			index -= 8
 		var distance = (zombie_spawns[index].global_position - player.global_position).length()
-		if(distance > 600):
+		if(distance > 1000):
 			pos = zombie_spawns[index].global_position
 			break
 	enemy.global_position = pos
