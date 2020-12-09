@@ -1,20 +1,39 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/kenney_shooter/tilesheet_complete.png" type="Texture" id=1]
 [ext_resource path="res://packages/AmmoPackage.gd" type="Script" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CircleShape2D" id=3]
 radius = 24.0
+
+[sub_resource type="Gradient" id=4]
+offsets = PoolRealArray( 0.184397, 0.556738, 0.925532 )
+colors = PoolColorArray( 0.300781, 0.226834, 0.122192, 1, 1, 0.972534, 0.296875, 1, 1, 1, 1, 1 )
 
 [node name="AmmoPackage" type="Area2D"]
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( -0.297302, -2.06754 )
-shape = SubResource( 1 )
+shape = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 1664, 320, 64, 64 )
+
+[node name="Effect" type="CPUParticles2D" parent="."]
+amount = 20
+emission_shape = 1
+emission_sphere_radius = 27.55
+direction = Vector2( 0, 0 )
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 10.0
+initial_velocity_random = 1.0
+angular_velocity = 63.79
+angular_velocity_random = 1.0
+scale_amount = 7.33
+scale_amount_random = 1.0
+color_ramp = SubResource( 4 )
 [connection signal="body_entered" from="." to="." method="_on_package_body_entered"]

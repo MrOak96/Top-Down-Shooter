@@ -22,6 +22,7 @@ func _process(delta):
 
 func shoot():
 	if cooldown == 0 and Bullet != null and ammo > 0:
+		$Sprite/shoot.play()
 		ammo = ammo - 1
 		var bullet_instance = Bullet.instance()
 		var direction = (gunEnd.global_position - gun.global_position).normalized()
