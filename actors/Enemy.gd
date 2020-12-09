@@ -7,7 +7,7 @@ var path: = PoolVector2Array()
 
 onready var nav_2d: Navigation2D = get_node("/root/Main/Map/Navigation2D")
 onready var main = get_node("/root/Main")
-onready var health = $Health
+onready var health = 100
 onready var animation_damage = $AnimationPlayer
 onready var player: Player = get_node("/root/Main/Player")
 onready var cooldown: Timer = $AttackCooldown
@@ -38,11 +38,11 @@ func handle_hit():
 	initBleeding()
 
 func take_damage(var damage):
-	health.health -= damage
+	health -= damage
 	animation_damage.play("DamageAnimation")
 	hurt_sounds[randi()%1].play()
 	$Blood.emitting = true
-	if(health.health <= 0):
+	if(health <= 0):
 		on_death()
 
 func on_death():

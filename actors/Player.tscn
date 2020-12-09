@@ -183,9 +183,6 @@ shape = SubResource( 2 )
 [node name="Weapon" parent="." instance=ExtResource( 2 )]
 position = Vector2( 33.8461, 8.82941 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/take_hit = SubResource( 3 )
 
